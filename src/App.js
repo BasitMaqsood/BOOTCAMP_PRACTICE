@@ -1,17 +1,31 @@
+import React, { useState } from 'react';
+
+import Message from './components/Message';
+import Button from './components/button';
+import LightButton from './components/lightButton';
+import LightStatus from './components/lightStatus';
+
 import './App.css';
-import Card from './components/Card';
-import Card2 from './components/Card2';
 
 function App() {
+
+  const [count, setCount] = useState(0);
+  const [isLight, setLight] = useState(false);
+
+  // const handleUpdateCount = () => {
+  //   setCount(count++);
+  // }
+
+  const handleUpdateLight = () => {
+    setLight(!isLight);
+  }
+
   return (
-    <div className="App">
-      <h3>Hello Malik Basit Maqsood (Full Stack Developer)</h3>
-      <div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between' }}>
-        {[1, 2, 3].map(card => <Card />)}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between' }}>
-        {[1, 2, 3].map(card => <Card2 />)}
-      </div>
+    <div className={`App box ${isLight ? 'day-light' : ''} `}>
+      <Message count={count} />
+      <LightStatus isLight={isLight} />
+      <Button onClickCount={setCount} counter={count} />
+      <LightButton onClickLight={handleUpdateLight} />
     </div>
   );
 }
