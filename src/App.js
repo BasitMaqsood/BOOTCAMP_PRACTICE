@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
 
-import Message from './components/Message';
-import Button from './components/button';
-import LightButton from './components/lightButton';
-import LightStatus from './components/lightStatus';
+import Parent from './components/Parent';
+
+import CounterContext from './CounterContext';
 
 import './App.css';
 
 function App() {
 
-  const [count, setCount] = useState(0);
-  const [isLight, setLight] = useState(false);
-
-  // const handleUpdateCount = () => {
-  //   setCount(count++);
-  // }
-
-  const handleUpdateLight = () => {
-    setLight(!isLight);
-  }
+  const countState = useState(1);
 
   return (
-    <div className={`App box ${isLight ? 'day-light' : ''} `}>
-      <Message count={count} />
-      <LightStatus isLight={isLight} />
-      <Button onClickCount={setCount} counter={count} />
-      <LightButton onClickLight={handleUpdateLight} />
-    </div>
+    <CounterContext.Provider value={countState}>
+      <div className="App">
+        <Parent />
+      </div>
+    </CounterContext.Provider>
   );
 }
 
